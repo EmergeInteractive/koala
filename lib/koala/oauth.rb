@@ -32,9 +32,9 @@ module Koala
       #
       # @return the authenticated user's information as a hash, or nil.
       def get_user_info_from_cookies(cookie_hash)
-        if signed_cookie = cookie_hash["fbsr_#{@app_id}"]
+        if signed_cookie = cookie_hash["fbsr_#{@app_id}".to_sym]
           parse_signed_cookie(signed_cookie)
-        elsif unsigned_cookie = cookie_hash["fbs_#{@app_id}"]
+        elsif unsigned_cookie = cookie_hash["fbs_#{@app_id}".to_sym]
           parse_unsigned_cookie(unsigned_cookie)
         end
       end
@@ -48,7 +48,7 @@ module Koala
       #
       # @return the authenticated user's Facebook ID, or nil.
       def get_user_from_cookies(cookies)
-        if signed_cookie = cookies["fbsr_#{@app_id}"]
+        if signed_cookie = cookies["fbsr_#{@app_id}".to_sym]
           if components = parse_signed_request(signed_cookie)
             components["user_id"]
           end
